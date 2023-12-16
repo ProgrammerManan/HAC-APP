@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beta Version &#xb7; HAC App &#xb7; Programmer Manan</title>
+    <link rel="icon" type="image/x-icon" href="../static/Logo.png">
+
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #262626;
+        background-color: #0B0C10;
+
+    }
+
+    .wrapper {
+        width: 420px;
+        background-color: rgb(105, 105, 105);
+        background-color: #1F2833;
+        color: dodgerblue;
+        color: #66FcF1;
+        border-radius: 10px;
+        padding: 30px 40px;
+        border: 2px solid;
+        border-color: #66FcF1;
+    }
+
+    .wrapper h1 {
+        font-size: 36px;
+        text-align: center;
+        color: #66FcF1;
+    }
+
+    .wrapper p{
+            text-align: center;
+            font-size: 12px;
+            color: white;
+            padding-top: 5px;
+        }
+
+        .wrapper a{
+            text-align: right;
+            color: white;
+            text-decoration: none;
+        }
+        .wrapper .btn{
+            width: 100%;
+            height: 45px;
+            background-color: #66FcF1;
+            color: #1F2833;
+            border: none;
+            outline: none;
+            border-radius: 45px;
+            /* box-shadow: 0 0 10px white; */
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+    
+</style>
+
+<body>
+    <div class="wrapper">
+        <h1>Beta Version!</h1>
+        <hr style="margin-top: 15px; margin-bottom: 15px;">
+        <br>
+        I'm thrilled to introduce you to the beta version of my latest creation – an app designed for students just like you and me
+        . The main goal? To take the hassle out of GPA calculation and see your grades in a new UI. No more manual
+        calculations or spreadsheets – just a quick and easy way to check your GPA and gradeElements.
+        <br><br>
+        This is just the beginning! I'm in the early stages of development, and your feedback is invaluable. I haven't
+        even settled on a name yet – that's where you come in. I'd love to hear your thoughts, suggestions, and any bugs
+        you might encounter.
+        
+        <br><br>
+        <strong style="color: white; text-decoration: underline;">How can you help?</strong>
+        <br><br>
+        <ul>
+            <li>Let me know if you spot any quirks or bugs.</li>
+            <li>Share your thoughts and suggestions – they're like gold to me.</li>
+            <li>Have an awesome idea for a name? I'm all ears! <a href="https://formsubmit.co/el/meriku" target="_blank" style="color: white;">Connect Me</a></li>
+            <li>Any other suggestions or ideas are very welcome!</li>
+        </ul>
+        <br>
+        Your input matters, and I'm genuinely excited to hear from you. Drop me an email at <a href="mailto:programmermanan@gmail.com" target="_blank" style="color: white;">programmermanan@gmail.com</a> or reach
+        out through my contact form linked below with your feedback.
+        
+        <br><br>
+        Thanks a ton for being part of this exciting journey! Together, we're making something awesome for students
+        everywhere.
+        
+        <br><br>
+        Happy exploring!
+        <br>
+        <strong style="color: white;">Manan Maheshwari</strong>
+        <form action="{{ url_for('hac_login') }}">
+        <button class="btn"  type="submit">Back To Login</button>
+        </form >
+        <hr style="margin-top: 15px; margin-bottom: 15px;">
+        <p>
+            <span>By - Programmer Manan</span>
+        </p>
+        <p><a href="https://formsubmit.co/el/meriku" target="_blank">Contact Me</a></p>
+</body>
+
+</html>

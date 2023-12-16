@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Login &#xb7; Programmer Manan</title>
+    <link rel="icon" type="image/x-icon" href="../static/Logo.png">
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #262626;
+            background-color: #0B0C10;
+
+        }
+        .wrapper{
+            width: 420px;
+            background-color: rgb(105, 105, 105);
+            background-color: #1F2833;
+            color: dodgerblue;
+            color: #66FcF1;
+            border-radius: 10px;
+            padding: 30px 40px;
+            border: 2px solid;
+        }
+        .wrapper h1{
+            font-size: 36px;
+            text-align: center;
+        }
+
+        .wrapper h6{
+            color: white;
+            text-align: center;
+        }
+        .wrapper .input-box{
+            position: relative;
+            width: 100%;
+            height: 50px;
+            background-color: #262626;
+            background-color: #1F2833;
+            margin: 30px 0;
+        }
+        .input-box input{
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            border: 2px solid white;
+            border-radius: 40px;
+            font-size: 16px;
+            color: white;
+            padding: 20px 45px 20px 20px;
+        }
+        .input-box input::placeholder{
+            color: #66FcF1;
+        }
+        .input-box i{
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .wrapper .btn{
+            width: 100%;
+            height: 45px;
+            background-color: #66FcF1;
+            color: #1F2833;
+            border: none;
+            outline: none;
+            border-radius: 45px;
+            /* box-shadow: 0 0 10px white; */
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .wrapper p{
+            text-align: center;
+            font-size: 12px;
+            color: white;
+            padding-top: 5px;
+        }
+
+        .wrapper a{
+            text-align: right;
+            color: white;
+            text-decoration: none;
+        }
+
+        #loading {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #1F2833;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    flex-direction: column; /* Add this line to stack the elements vertically */
+}
+
+#loading p {
+    font-size: 36px;
+    text-align: center;
+    color: #66FcF1;
+    margin-bottom: 20px; /* Add margin to separate the text and the line */
+    position: relative; /* Add this line for positioning the line */
+}
+
+#loading p::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px; /* Adjust the line height as needed */
+    background: #66FcF1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: slideLine 2s linear infinite; /* Adjust the animation duration as needed */
+    text-decoration: bold;
+}
+
+@keyframes slideLine {
+    to {
+        width: 0; /* Adjust the width to control the animation */
+    }
+}
+    </style>
+
+</head>
+<body>
+    <div id="loading">
+        <p>Loading...</p>
+    </div>
+    <div class="wrapper">
+        <form id="login-form" action="{{ url_for('hac_login') }}" method="post">
+            {% if message %}
+  <div class="alert alert-danger" role="alert">
+    {{ message }}
+  </div>
+{% endif %}
+            <h6><a href="{{ url_for('beta_page') }}">BETA VERSION</a></h6>
+            <h1>HAC <a href="{{ url_for('hac_login') }}"><img src="../static/Logo.png" alt="hello" style="width: 30px; height: 30px; margin-top: 20px;"></a> Login</h1>
+            <div class="input-box">
+                <input type="text" placeholder="HAC Username" name="username" required/>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="HAC Password" name="password" id="password" required/>
+                <i id="password-toggle" class='bx bxs-lock-alt'></i>
+            </div>
+            
+            <button type="submit" class="btn">Login</button>
+            <p>
+                <span>By - Programmer Manan</span>
+            </p>
+            <p><a href="https://formsubmit.co/el/meriku" target="_blank">Contact Me</a></p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function () {
+            document.getElementById('loading').style.display = 'flex';
+        });
+
+        document.getElementById('password-toggle').addEventListener('click', function () {
+        var passwordInput = document.getElementById('password');
+        var icon = document.getElementById('password-toggle');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.className = 'bx bxs-lock-open-alt';
+        } else {
+            passwordInput.type = 'password';
+            icon.className = 'bx bxs-lock-alt';
+        }
+    });
+    </script>
+
+</body>
+</html>
