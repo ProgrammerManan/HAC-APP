@@ -85,8 +85,8 @@ def logout():
 def beta_page():
     return render_template('beta.html')
 
-if __name__ == '__main__':
-    app.run(debug=True, port=9999)
-
 # if __name__ == '__main__':
-#     app.run(debug=False, host='0.0.0.0')
+#     app.run(debug=True, port=9999)
+
+if __name__ == '__main__':
+    app.run(debug=False, host='0.0.0.0')
