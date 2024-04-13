@@ -68,11 +68,17 @@ def app_page():
 
     result = get_student_classes.get(username, password)
 
+    if result is None:
+        # Handle the case where an error occurred in getting student classes
+        return render_template('error.html', error_message='Error fetching student classes. Please try again.')
+
     data_info = get_student_info.get(username, password)
-    data_classes, weighted_gpa = result
-    
-    # for class_info in data_classes:
-    #     class_info['class_grade'] = convert_to_integer(class_info['class_grade'])
+
+    if result is not None:
+        # Check if result is not None before unpacking
+        data_classes, weighted_gpa = result
+    else:
+        data_classes, weighted_gpa = [], 0.00  # Set default values in case of None
 
     return render_template('app.html', data_info=data_info, data_classes=data_classes, weighted_gpa=weighted_gpa)
 
