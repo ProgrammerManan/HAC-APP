@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grades &#xb7; Programmer Manan</title>
     <link rel="icon" type="image/x-icon" href="../static/Logo.png">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
+
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 *{
@@ -134,10 +136,12 @@ body{
             {% endfor %}
             <hr>
             <p class="weighted_gpa"> Weighted GPA<strong>{{ weighted_gpa }}</strong></p>
+            <p class="weighted_gpa"> Max Weighted GPA<strong>{{ maxGPA }}</strong></p>
+
         {% else %}
             <p>No classes available for this student.</p>
         {% endif %}
-        
+
         <form action="{{ url_for('logout') }}" method="post">
             <hr>
             <button type="submit" class="btn" onclick="{{ url_for('hac_login') }}">Logout</button>
@@ -150,10 +154,10 @@ body{
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var gradeElements = document.querySelectorAll('.class-grade');
-    
+
             gradeElements.forEach(function(element) {
                 var grade = parseInt(element.innerText);
-    
+
                 if (Number(grade) < 70) {
                     element.style.backgroundColor = '#FF0000';
                 } else if (Number(grade) < 80) {
@@ -167,5 +171,7 @@ body{
             });
         });
     </script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
 </body>
 </html>

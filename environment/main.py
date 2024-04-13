@@ -10,25 +10,31 @@ app.secret_key = "your_secret_key"  # Change this to a secure secret key
 def calculate_weighted_gpa(class_names, class_grades):
     try:
         total_weighted_grade = 0
+        max_weighted_grade = 0
         classes_num = len(class_names)
 
         for i in range(classes_num):
             grade = float(class_grades[i])  # Convert grade to float
             class_name = class_names[i]
 
-            if "AP" in class_name:
+            if "AP" in class_name or "IB" in class_name:
                 total_weighted_grade += (grade / 100) * 6.0
+                max_weighted_grade += 6.0
             elif "Adv" in class_name:
                 total_weighted_grade += (grade / 100) * 5.5
+                max_weighted_grade += 5.5
             else:
                 total_weighted_grade += (grade / 100) * 5.0
-        
+                max_weighted_grade += 5.0
+
         weighted_gpa = total_weighted_grade / classes_num
+        max_weighted_gpa = max_weighted_grade / classes_num
 
         weighted_gpa = round(weighted_gpa, 4)
     except:
         weighted_gpa = 0.00
-    return weighted_gpa
+    gpa = [weighted_gpa, max_weighted_gpa]
+    return gpa
 
 #Home Index page (default page)
 # @app.route('/')
@@ -57,7 +63,7 @@ def convert_to_integer(value):
         return int(value)
     except (ValueError, TypeError):
         return 0  # Handle the case where conversion is not possible
-    
+
 @app.route('/app', methods=['GET'])
 def app_page():
     username = session.get('hac_username')
@@ -68,19 +74,14 @@ def app_page():
 
     result = get_student_classes.get(username, password)
 
-    if result is None:
-        # Handle the case where an error occurred in getting student classes
-        return render_template('error.html', error_message='Error fetching student classes. Please try again.')
-
     data_info = get_student_info.get(username, password)
+    data_classes, weighted_gpa = result
 
-    if result is not None:
-        # Check if result is not None before unpacking
-        data_classes, weighted_gpa = result
-    else:
-        data_classes, weighted_gpa = [], 0.00  # Set default values in case of None
+    # for class_info in data_classes:
+    #     class_info['class_grade'] = convert_to_integer(class_info['class_grade'])
 
-    return render_template('app.html', data_info=data_info, data_classes=data_classes, weighted_gpa=weighted_gpa)
+    return render_template('app.html', data_info=data_info, data_classes=data_classes,
+                           weighted_gpa=weighted_gpa[0], maxGPA=weighted_gpa[1])
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
@@ -91,8 +92,8 @@ def logout():
 def beta_page():
     return render_template('beta.html')
 
-# if __name__ == '__main__':
-#     app.run(debug=True, port=9999)
-
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0')
+    app.run(debug=True, port=9999)
+
+# if __name__ == '__main__':
+#     app.run(debug=False, host='0.0.0.0')
