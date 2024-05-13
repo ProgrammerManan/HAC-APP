@@ -30,8 +30,8 @@ def calculate_weighted_gpa(class_names, class_grades):
         weighted_gpa = total_weighted_grade / classes_num
         max_weighted_gpa = max_weighted_grade / classes_num
 
-        weighted_gpa = round(weighted_gpa, 4)
-        max_weighted_gpa = round(max_weighted_gpa, 4)
+        weighted_gpa = round(weighted_gpa, 3)
+        max_weighted_gpa = round(max_weighted_gpa, 3)
     except:
         weighted_gpa = 0.00
     gpa = [weighted_gpa, max_weighted_gpa]
