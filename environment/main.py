@@ -15,23 +15,35 @@ def calculate_weighted_gpa(class_names, class_grades):
 
         for i in range(classes_num):
             grade = float(class_grades[i])  # Convert grade to float
+            grade = int(grade)
             class_name = class_names[i]
 
-            if "AP" in class_name or "IB" in class_name:
-                total_weighted_grade += (grade / 100) * 6.0
+            if "AP" in class_name or "IB" in class_name or "Computer Sci 3 Adv" in class_name:
+                if grade<70 or grade==0.00:
+                    total_weighted_grade += 0
+                else:
+                    total_weighted_grade += 6.0 - ((100 - grade)/10)
                 max_weighted_grade += 6.0
             elif "Adv" in class_name:
-                total_weighted_grade += (grade / 100) * 5.5
+                if grade < 70 or grade == 0.00:
+                    total_weighted_grade += 0
+                else:
+                    total_weighted_grade += 5.5 - ((100 - grade) / 10)
                 max_weighted_grade += 5.5
             else:
-                total_weighted_grade += (grade / 100) * 5.0
+                if grade < 70 or grade == 0.00:
+                    total_weighted_grade += 0
+                else:
+                    total_weighted_grade += 5.0 - ((100 - grade) / 10)
                 max_weighted_grade += 5.0
 
+        if session['hac_username'] == 233044:
+            classes_num = classes_num - 1
         weighted_gpa = total_weighted_grade / classes_num
         max_weighted_gpa = max_weighted_grade / classes_num
 
-        weighted_gpa = round(weighted_gpa, 4)
-        max_weighted_gpa = round(max_weighted_gpa, 4)
+        weighted_gpa = round(weighted_gpa, 3)
+        max_weighted_gpa = round(max_weighted_gpa, 3)
     except:
         weighted_gpa = 0.00
     gpa = [weighted_gpa, max_weighted_gpa]
@@ -93,8 +105,8 @@ def logout():
 def beta_page():
     return render_template('beta.html')
 
-# if __name__ == '__main__':
-#     app.run(debug=True, port=9999)
-
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0')
+    app.run(debug=True, port=9999)
+
+# if __name__ == '__main__':
+#     app.run(debug=False, host='0.0.0.0')
