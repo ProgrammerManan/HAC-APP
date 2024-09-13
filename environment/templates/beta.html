@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beta Version &#xb7; HAC App &#xb7; Programmer Manan</title>
     <link rel="icon" type="image/x-icon" href="../static/Logo.png">
-
 </head>
+
 <style>
     * {
         margin: 0;
@@ -23,7 +23,6 @@
         min-height: 100vh;
         background-color: #262626;
         background-color: #0B0C10;
-
     }
 
     .wrapper {
@@ -38,46 +37,81 @@
         border-color: #66FcF1;
     }
 
-    .wrapper h1 {
+    .title-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .title-container h1 {
         font-size: 36px;
         text-align: center;
         color: #66FcF1;
+        margin-right: 10px;
     }
 
-    .wrapper p{
-            text-align: center;
-            font-size: 12px;
-            color: white;
-            padding-top: 5px;
-        }
+    .return-btn {
+        width: 80px;
+        height: 40px;
+        background-color: #66FcF1;
+        color: #1F2833;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 24px;
+        text-align: center;
+        line-height: 40px;
+        transition: background-color 0.3s;
+        margin-right: 15px;
+    }
 
-        .wrapper a{
-            text-align: right;
-            color: white;
-            text-decoration: none;
+    @media (max-width: 700px) {
+        .return-btn{
+            width: 55px;
+            margin-right: 10px;
         }
-        .wrapper .btn{
-            width: 100%;
-            height: 45px;
-            background-color: #66FcF1;
-            color: #1F2833;
-            border: none;
-            outline: none;
-            border-radius: 45px;
-            /* box-shadow: 0 0 10px white; */
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            margin-top: 15px;
-            margin-bottom: 15px;
-        }
+    }
 
-    
+
+    .return-btn:hover {
+        background-color: #45A29E;
+    }
+
+    .wrapper p {
+        text-align: center;
+        font-size: 12px;
+        color: white;
+        padding-top: 5px;
+    }
+
+    .wrapper a {
+        text-align: right;
+        color: white;
+        text-decoration: none;
+    }
+
+    .wrapper .btn {
+        width: 100%;
+        height: 45px;
+        background-color: #66FcF1;
+        color: #1F2833;
+        border: none;
+        outline: none;
+        border-radius: 45px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
 </style>
 
 <body>
     <div class="wrapper">
-        <h1>Beta Version!</h1>
+        <div class="title-container">
+            <button class="return-btn" onclick="window.history.back()">&#8592;</button>
+            <h1>Beta Version!</h1>
+        </div>
         <hr style="margin-top: 15px; margin-bottom: 15px;">
         <br>
         I'm thrilled to introduce you to the beta version of my latest creation – an app designed for students just like you and me
@@ -87,7 +121,7 @@
         This is just the beginning! I'm in the early stages of development, and your feedback is invaluable. I haven't
         even settled on a name yet – that's where you come in. I'd love to hear your thoughts, suggestions, and any bugs
         you might encounter.
-        
+
         <br><br>
         <strong style="color: white; text-decoration: underline;">How can you help?</strong>
         <br><br>
@@ -100,23 +134,24 @@
         <br>
         Your input matters, and I'm genuinely excited to hear from you. Drop me an email at <a href="mailto:programmermanan@gmail.com" target="_blank" style="color: white;">programmermanan@gmail.com</a> or reach
         out through my contact form linked below with your feedback.
-        
+
         <br><br>
         Thanks a ton for being part of this exciting journey! Together, we're making something awesome for students
         everywhere.
-        
+
         <br><br>
         Happy exploring!
         <br>
         <strong style="color: white;">Manan Maheshwari</strong>
         <form action="{{ url_for('hac_login') }}">
-        <button class="btn"  type="submit">Back To Login</button>
+        <button class="btn" type="submit">Back To Login</button>
         </form >
         <hr style="margin-top: 15px; margin-bottom: 15px;">
         <p>
             <span>By - Programmer Manan</span>
         </p>
         <p><a href="https://formsubmit.co/el/meriku" target="_blank">Contact Me</a></p>
+    </div>
 </body>
 
 </html>
