@@ -24,13 +24,7 @@ def calculate_weighted_gpa(class_names, class_grades):
                 if grade<70 or grade==0.00:
                     total_weighted_grade += 0
                 else:
-                    if "Computer Sci 3 Adv" in class_name:
-                        total_weighted_grade += 6.0 - ((100 - grade) / 10)
-                        total_weighted_grade += 6.0 - ((100 - grade) / 10)
-                        max_weighted_grade += 6
-                        classes_num = classes_num + 1
-                    else:
-                        total_weighted_grade += 6.0 - ((100 - grade)/10)
+                    total_weighted_grade += 6.0 - ((100 - grade)/10)
                 max_weighted_grade += 6.0
             elif "Adv" in class_name:
                 if grade < 70 or grade == 0.00:
@@ -47,6 +41,8 @@ def calculate_weighted_gpa(class_names, class_grades):
 
         if session['hac_username'] == str(os.environ["ojas_ID"]):
             classes_num = classes_num - 1
+            max_weighted_grade = max_weighted_grade - 6
+
         weighted_gpa = total_weighted_grade / classes_num
         max_weighted_gpa = max_weighted_grade / classes_num
 
@@ -113,8 +109,8 @@ def logout():
 def beta_page():
     return render_template('beta.html')
 
-# if __name__ == '__main__':
-#     app.run(debug=True, port=9999)
-
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0')
+    app.run(debug=True, port=9999)
+
+# if __name__ == '__main__':
+#     app.run(debug=False, host='0.0.0.0')

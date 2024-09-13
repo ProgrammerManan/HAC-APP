@@ -74,6 +74,6 @@ def get(username, password):
         print(f"An unexpected error occurred: {err}")
 
 # Example usage
-# classes_info, result_gpa = get("292291", "09262008")
+# classes_info, result_gpa = get("000000", "000000")
 # print("Classes Information:", classes_info)
 # print("Weighted GPA:", result_gpa)
