@@ -152,6 +152,22 @@
         </p>
         <p><a href="https://formsubmit.co/el/meriku" target="_blank">Contact Me</a></p>
     </div>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get login status from Jinja2 variable
+            var isLoggedIn = {{ is_logged_in | tojson }};
+            var returnButton = document.getElementById('return-btn');
+
+            returnButton.addEventListener('click', function() {
+                if (isLoggedIn) {
+                    window.location.href = '/app';
+                } else {
+                    window.location.href = '/login';
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

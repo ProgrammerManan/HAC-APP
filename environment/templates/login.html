@@ -103,7 +103,7 @@
             text-decoration: none;
         }
 
-        #loading {
+#loading {
     display: none;
     position: fixed;
     top: 0;
@@ -114,7 +114,7 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    flex-direction: column; /* Add this line to stack the elements vertically */
+    flex-direction: column;
 }
 
 #loading p {
@@ -122,7 +122,7 @@
     text-align: center;
     color: #66FcF1;
     margin-bottom: 20px; /* Add margin to separate the text and the line */
-    position: relative; /* Add this line for positioning the line */
+    position: relative;
 }
 
 #loading p::after {
@@ -134,13 +134,16 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    animation: slideLine 2s linear infinite; /* Adjust the animation duration as needed */
-    text-decoration: bold;
+    animation: slideLine 10s linear infinite; /* Adjust the animation duration as needed */
 }
 
 @keyframes slideLine {
-    to {
+    from {
         width: 0; /* Adjust the width to control the animation */
+    }
+
+    to {
+        width: 100%;
     }
 }
     </style>
@@ -170,7 +173,7 @@
             
             <button type="submit" class="btn">Login</button>
             <p>
-                <a style="cursor: pointer" href="https://programmermanan.netlify.com" target="_blank"><span>By - Programmer Manan</span></a>
+                <a style="cursor: pointer" href="https://github.com/programmermanan" target="_blank"><span>By - Programmer Manan</span></a>
             </p>
             <p><a href="https://formsubmit.co/el/meriku" target="_blank">Contact Me</a></p>
         </form>

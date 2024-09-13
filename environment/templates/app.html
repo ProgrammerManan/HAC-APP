@@ -109,13 +109,93 @@ body{
             padding-left: 15px;
         }
 
+        h1 {
+    display: inline-block;
+    margin-right: 0px;
+}
+
+.refresh-btn {
+    text-decoration: none;
+    color: #66FcF1;
+    font-size: 50px;
+    vertical-align: middle;  /* Aligns the button to the middle of the H1 text */
+    margin-left: 10px;
+    /* Adds some spacing between the h1 text and the icon */
+}
+
+.refresh-btn i{
+    color: black;
+    background-color: #66FcF1;
+    border-radius: 10px
+}
+
+.refresh-btn i:hover{
+    background-color: #45A29E;
+}
+
+#loading {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #1F2833;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    flex-direction: column;
+}
+
+#loading p {
+    font-size: 36px;
+    text-align: center;
+    color: #66FcF1;
+    margin-bottom: 20px; /* Add margin to separate the text and the line */
+    position: relative;
+}
+
+#loading p::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px; /* Adjust the line height as needed */
+    background: #66FcF1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: slideLine 10s linear infinite; /* Adjust the animation duration as needed */
+}
+
+@keyframes slideLine {
+    from {
+        width: 0; /* Adjust the width to control the animation */
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
 
     </style>
 </head>
 <body>
+    <div id="loading" class="loading-screen">
+<!--        <div class="wrapper">-->
+        <p>Loading...</p>
+<!--        </div>-->
+    </div>
     <div class="wrapper">
         <h6><a href="{{ url_for('beta_page') }}">BETA VERSION</a></h6>
-        <h1>Student Classes</h1>
+        <h1 style="display: inline; font-size: 32px">
+    Student Classes
+        </h1>
+<a href="#" class="refresh-btn" title="Refresh" id="refresh-btn">
+    <i class='bx bx-refresh' style=""></i>
+</a>
+                <hr>
+
         {% if data_classes %}
             {% for class_info in data_classes %}
             <div>
@@ -147,7 +227,7 @@ body{
             <button type="submit" class="btn" onclick="{{ url_for('hac_login') }}">Logout</button>
         </form>
         <span>
-            By - <a href="https://programmermanan.netlify.com" target="_blank">Programmer Manan</a> -
+            By - <a href="https://github.com/programmermanan" target="_blank">Programmer Manan</a> -
             <a href="https://formsubmit.co/el/meriku" target="_blank">Contact Me</a>
         </span>
     </div>
@@ -169,6 +249,34 @@ body{
                     // element.style.backgroundColor = '#FFDB58';
                 }
             });
+        });
+    </script>
+
+    <script>
+        document.getElementById('refresh-btn').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default link behavior
+
+            // Show the loading screen
+            document.getElementById('loading').style.display = 'flex';
+
+            // Make the API call to refresh data
+            fetch('{{ url_for("refresh_data") }}')
+                .then(response => response.json())
+                .then(data => {
+                    // Update the page with new data
+                    // You can use JavaScript to update the DOM elements with new data here
+
+                    // Hide the loading screen
+                    document.getElementById('loading').style.display = 'none';
+
+                    // Optionally reload the page to reflect the new data
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('Error fetching new data:', error);
+                    // Hide the loading screen even in case of error
+                    document.getElementById('loading').style.display = 'none';
+                });
         });
     </script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>

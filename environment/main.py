@@ -1,3 +1,4 @@
+import json
 import os
 
 from flask import Flask, abort, render_template, request, session, redirect, url_for, jsonify
@@ -91,15 +92,23 @@ def app_page():
     if not (username and password):
         return redirect('/')
 
-    result = get_student_classes.get(username, password)
+    if "result" not in session or "data_info" not in session:
+        result = get_student_classes.get(username, password)
+        data_info = get_student_info.get(username, password)
+        session["result"] = result
+        session["data_info"] = data_info
+    else:
+        result = session["result"]
+        data_info = session["data_info"]
 
-    data_info = get_student_info.get(username, password)
     data_classes, weighted_gpa = result
+
 
     # for class_info in data_classes:
     #     class_info['class_grade'] = convert_to_integer(class_info['class_grade'])
 
-    return render_template('app.html', data_info=data_info, data_classes=data_classes,
+    return render_template('app.html', data_info=data_info,
+                           data_classes=data_classes,
                            weighted_gpa=weighted_gpa[0], maxGPA=weighted_gpa[1])
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -109,7 +118,27 @@ def logout():
 
 @app.route('/beta')
 def beta_page():
-    return render_template('beta.html')
+    is_logged_in = ('hac_username' in session) and ('hac_password' in session)
+    return render_template('beta.html', is_logged_in=is_logged_in)
+
+@app.route('/refresh-data', methods=['GET'])
+def refresh_data():
+    username = session.get('hac_username')
+    password = session.get('hac_password')
+
+    if not (username and password):
+        return jsonify({'error': 'Not logged in'}), 401
+
+    # Make the API call to get fresh data
+    result = get_student_classes.get(username, password)
+    data_info = get_student_info.get(username, password)
+
+    # Update session with new data
+    session["result"] = result
+    session["data_info"] = data_info
+
+    # Respond with new data (or a success message)
+    return jsonify({'success': 'Data refreshed successfully'}), 200
 
 # if __name__ == '__main__':
 #     app.run(debug=True, port=9999)
