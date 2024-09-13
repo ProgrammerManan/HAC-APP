@@ -44,7 +44,7 @@ def get(username, password):
             # Append information to the list
 
             class_name = class_name.replace(course_code, "")
-            class_name = class_name.replace(course_number, "")
+            class_name = class_name.replace(course_number, "", 1)
             class_name = class_name.replace("-", "")
 
             classes_info.append({

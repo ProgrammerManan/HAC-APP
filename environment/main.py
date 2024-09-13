@@ -48,8 +48,10 @@ def calculate_weighted_gpa(class_names, class_grades):
 
         weighted_gpa = round(weighted_gpa, 3)
         max_weighted_gpa = round(max_weighted_gpa, 3)
-    except:
-        weighted_gpa = 0.00
+    except Exception as e:
+        print(f"An exception occurred: {e}")
+        weighted_gpa = 0.000
+        max_weighted_gpa = 0.000
     gpa = [weighted_gpa, max_weighted_gpa]
     return gpa
 
