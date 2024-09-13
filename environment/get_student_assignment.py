@@ -3,7 +3,7 @@ import requests
 def get_assignments(username, password):
     api_url = "https://friscoisdhacapi.vercel.app/api/currentclasses"
     payload = {'username': username, 'password': password}
-    
+
     try:
         response = requests.get(api_url, params=payload)
         response.raise_for_status()  # Raise an HTTPError for bad responses
@@ -23,8 +23,10 @@ def get_assignments(username, password):
             for assignment in assignments:
                 assignment_name = assignment.get('name', 'N/A')
                 assignment_score = assignment.get('score', 'N/A')
+                assignment_type = assignment.get('category', 'N/A')
 
-                print(f"{assignment_name} - {assignment_score}")
+                if assignment_type == "Assessment of Learning":
+                    print(f"{assignment_name} ({assignment_type}) - {assignment_score}")
 
     except Exception as e:
         # Print or log the error
@@ -35,4 +37,4 @@ def get_assignments(username, password):
 
 
 # Example usage
-get_assignments("292291", "09262008")
+get_assignments("000000", "000000")

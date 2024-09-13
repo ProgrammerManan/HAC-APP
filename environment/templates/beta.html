@@ -109,7 +109,7 @@
 <body>
     <div class="wrapper">
         <div class="title-container">
-            <button class="return-btn" onclick="window.history.back()">&#8592;</button>
+            <button class="return-btn" id="return-btn">&#8592;</button>
             <h1>Beta Version!</h1>
         </div>
         <hr style="margin-top: 15px; margin-bottom: 15px;">
@@ -163,7 +163,7 @@
                 if (isLoggedIn) {
                     window.location.href = '/app';
                 } else {
-                    window.location.href = 'https://hacapp-manan.onrender.com/';
+                    window.location.href = '/';
                 }
             });
         });
