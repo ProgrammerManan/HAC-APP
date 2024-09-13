@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, abort, render_template, request, session, redirect, url_for, jsonify
 import requests
 import get_student_info #Importing the student info file to get the info from the api
@@ -22,7 +24,13 @@ def calculate_weighted_gpa(class_names, class_grades):
                 if grade<70 or grade==0.00:
                     total_weighted_grade += 0
                 else:
-                    total_weighted_grade += 6.0 - ((100 - grade)/10)
+                    if "Computer Sci 3 Adv" in class_name:
+                        total_weighted_grade += 6.0 - ((100 - grade) / 10)
+                        total_weighted_grade += 6.0 - ((100 - grade) / 10)
+                        max_weighted_grade += 6
+                        classes_num = classes_num + 1
+                    else:
+                        total_weighted_grade += 6.0 - ((100 - grade)/10)
                 max_weighted_grade += 6.0
             elif "Adv" in class_name:
                 if grade < 70 or grade == 0.00:
@@ -37,7 +45,7 @@ def calculate_weighted_gpa(class_names, class_grades):
                     total_weighted_grade += 5.0 - ((100 - grade) / 10)
                 max_weighted_grade += 5.0
 
-        if session['hac_username'] == 233044:
+        if session['hac_username'] == str(os.environ["ojas_ID"]):
             classes_num = classes_num - 1
         weighted_gpa = total_weighted_grade / classes_num
         max_weighted_gpa = max_weighted_grade / classes_num
