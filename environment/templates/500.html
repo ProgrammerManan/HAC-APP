@@ -126,10 +126,9 @@
 <body>
     <div class="wrapper">
         <h1>500 Error</h1>
-        <form action="{{ url_for('logout') }}" method="post">
+        <form action="{% if session.get('hac_username') %} {{ url_for('app_page') }} {% else %} {{ url_for('hac_login') }} {% endif %}">
             <hr>
-            <p>Sorry for the inconvenience, we are getting too many requests right now</p>
-            <p>Please try again later</p>
+            <p>Sorry for the inconvenience, we are getting too many requests right now. Please try again later :(</p>
             <hr>
             <button type="submit" class="btn">Go Home?</button>
         </form>

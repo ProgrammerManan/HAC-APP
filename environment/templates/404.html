@@ -122,21 +122,20 @@
         }
     </style>
 </head>
-
 <body>
     <div class="wrapper">
         <h1>404 Error</h1>
-            <form action="{{ url_for('logout') }}" method="post">
-                <hr>
-                <p>Page not found</p>
-                <hr>
-                <button type="submit" class="btn">Go Home?</button>
-            </form>
-            <span>
-                By - <a href="https://github.com/programmermanan" target="_blank">Programmer Manan</a>
-                <br>
-                <a href="https://formsubmit.co/el/meriku" target="_blank">Contact Me</a>
-            </span>
+        <form action="{% if session.get('hac_username') %} {{ url_for('app_page') }} {% else %} {{ url_for('hac_login') }} {% endif %}">
+            <hr>
+            <p>Page not found</p>
+            <hr>
+            <button type="submit" class="btn">Go Home?</button>
+        </form>
+        <span>
+            By - <a href="https://github.com/programmermanan" target="_blank">Programmer Manan</a>
+            <br>
+            <a href="https://formsubmit.co/el/meriku" target="_blank">Contact Me</a>
+        </span>
     </div>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 
