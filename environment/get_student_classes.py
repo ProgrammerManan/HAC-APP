@@ -23,6 +23,7 @@ def get(username, password):
             for assignment in assignments:
                 assignment_name = assignment.get('name', 'N/A')
                 assignment_score = assignment.get('score', 'N/A')
+                assignment_category = assignment.get('category', 'N/A')
 
                 max_chars = 36  # You can adjust this value based on your preference
                 truncated_assignment_name = (
@@ -30,9 +31,11 @@ def get(username, password):
                 )
                 
                 # Append assignment information to the list
-                assignments_info.append(
-                    truncated_assignment_name + " - " + assignment_score
-                )
+                assignments_info.append({
+                'name': truncated_assignment_name,
+                'score': assignment_score,
+                'category': assignment_category
+                })
 
             # Extract course code and number
             course_info = class_name.split('-')
@@ -48,17 +51,27 @@ def get(username, password):
             class_name = class_name.replace("-", "")
 
             classes_info.append({
-                'class_name': class_name,
-                'course_code': f"{course_code} {course_number}",
-                'class_grade': class_grade,
-                'assignments': '<br>'.join(assignments_info)  # Exclude the first element (class name) when joining
+                "class_name": class_name,
+                "course_code": f"{course_code} {course_number}",
+                "class_grade": class_grade,
+                "assignments": assignments_info  # Exclude the first element (class name) when joining
             })
 
 
-        # Calculate weighted GPA
+        # Filter classes based on the condition that they have at least one assignment with:
+        # category == "Assessment of learning" and score != ""
+        filtered_classes_info = [
+            class_info for class_info in classes_info
+            if any(
+                assignment['category'] == "Assessment of Learning" and assignment['score'] != ""
+                for assignment in class_info['assignments']
+            )
+        ]
+
+        # Calculate weighted GPA only for the filtered classes
         weighted_gpa = calculate_weighted_gpa(
-            [class_info['class_name'] for class_info in classes_info],
-            [class_info['class_grade'] for class_info in classes_info]
+            [class_info["class_name"] for class_info in filtered_classes_info],
+            [class_info["class_grade"] for class_info in filtered_classes_info]
         )
 
         # Return the list containing information for all classes and the weighted GPA

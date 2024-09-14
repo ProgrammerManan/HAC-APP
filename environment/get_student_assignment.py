@@ -13,9 +13,6 @@ def get_assignments(username, password):
             return "Login Invalid"
 
         for class_info in data_classes.get('currentClasses', []):
-            class_name = class_info.get('name', 'N/A')
-            class_grade = class_info.get('grade', 'N/A')
-
             # print(f"\n{class_name} - {class_grade}\n{'-' * 40}")
 
             assignments = class_info.get('assignments', [])
@@ -30,11 +27,11 @@ def get_assignments(username, password):
 
     except Exception as e:
         # Print or log the error
-        print(f"Error in get_assignments: {e}")
+        #print(f"Error in get_assignments: {e}")
 
         # Return None or an empty list to indicate failure
         return None
 
 
 # Example usage
-get_assignments("000000", "000000")
+# get_assignments("000000", "000000")

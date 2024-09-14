@@ -15,6 +15,7 @@ def calculate_weighted_gpa(class_names, class_grades):
         total_weighted_grade = 0
         max_weighted_grade = 0
         classes_num = len(class_names)
+        print(classes_num)
 
         for i in range(classes_num):
             grade = float(class_grades[i])  # Convert grade to float
@@ -41,9 +42,12 @@ def calculate_weighted_gpa(class_names, class_grades):
                     total_weighted_grade += 5.0 - ((100 - grade) / 10)
                 max_weighted_grade += 5.0
 
-        if session['hac_username'] == str(os.environ["ojas_ID"]):
-            classes_num = classes_num - 1
-            max_weighted_grade = max_weighted_grade - 6
+        try:
+            if session['hac_username'] == str(os.environ["ojas_ID"]):
+                classes_num = classes_num - 1
+                max_weighted_grade = max_weighted_grade - 6
+        except:
+            pass
 
         weighted_gpa = total_weighted_grade / classes_num
         max_weighted_gpa = max_weighted_grade / classes_num
@@ -149,8 +153,8 @@ def page_not_found(e):
 def internal_error(e):
     return render_template('500.html'), 500
 
-# if __name__ == '__main__':
-#     app.run(debug=True, port=9999)
+if __name__ == '__main__':
+    app.run(debug=True, port=9999)
 
 if __name__ == '__main__':
-   app.run(debug=False, host='0.0.0.0')
+  app.run(debug=False, host='0.0.0.0')
