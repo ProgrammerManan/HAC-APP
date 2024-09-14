@@ -27,21 +27,18 @@ def calculate_weighted_gpa(class_names, class_grades):
                     total_weighted_grade += 0
                 else:
                     total_weighted_grade += 6.0 - ((100 - grade)/10)
-                    print(6.0 - ((100 - grade)/10))
                 max_weighted_grade += 6.0
             elif "Adv" in class_name:
                 if grade < 70 or grade == 0.00:
                     total_weighted_grade += 0
                 else:
                     total_weighted_grade += 5.5 - ((100 - grade) / 10)
-                    print(5.5 - ((100 - grade) / 10))
                 max_weighted_grade += 5.5
             else:
                 if grade < 70 or grade == 0.00:
                     total_weighted_grade += 0
                 else:
                     total_weighted_grade += 5.0 - ((100 - grade) / 10)
-                    print(5.0 - ((100 - grade) / 10))
                 max_weighted_grade += 5.0
 
         if session['hac_username'] == str(os.environ["ojas_ID"]):
