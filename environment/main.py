@@ -140,8 +140,16 @@ def refresh_data():
     # Respond with new data (or a success message)
     return jsonify({'success': 'Data refreshed successfully'}), 200
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(e):
+    return render_template('500.html'), 500
+
 # if __name__ == '__main__':
 #     app.run(debug=True, port=9999)
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0')
+   app.run(debug=False, host='0.0.0.0')

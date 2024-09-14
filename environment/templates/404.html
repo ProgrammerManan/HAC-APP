@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Page Not Found&#xb7; Programmer Manan</title>
+    <link rel="icon" type="image/x-icon" href="../static/Logo.png">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+            background-color: #262626;
+            background-color: #0B0C10;
+
+        }
+
+        .wrapper {
+            width: 420px;
+            background-color: rgb(105, 105, 105);
+            background-color: #1F2833;
+            color: dodgerblue;
+            color: #66FcF1;
+            border-radius: 10px;
+            padding: 30px 40px;
+            border: 2px solid;
+
+        }
+
+        .wrapper h1 {
+            font-size: 32px;
+            text-align: center;
+        }
+
+        .wrapper h6 {
+            color: white;
+            text-align: center;
+        }
+
+        .wrapper p {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            height: 50px;
+            background-color: #262626;
+            background-color: #1F2833;
+            margin: 30px 0;
+            font-size: 15px;
+        }
+
+        .wrapper p strong {
+            width: 70px;
+            height: 45px;
+            background-color: #66FcF1;
+            color: #1F2833;
+            border: none;
+            /* Adjust the border size and color as needed */
+            outline: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 15px 17px 17px 17px;
+            text-align: right;
+            /* Maintains right alignment */
+        }
+
+        .wrapper .btn {
+            width: 100%;
+            height: 45px;
+            background-color: #66FcF1;
+            color: #1F2833;
+            border: none;
+            outline: none;
+            border-radius: 45px;
+            /* box-shadow: 0 0 10px white; */
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .wrapper span {
+            text-align: center;
+            font-size: 12px;
+            color: white;
+            padding-top: 5px;
+            justify-content: space-between;
+
+        }
+
+        .wrapper a {
+            text-align: center;
+            color: white;
+            text-decoration: none;
+        }
+
+        .wrapper ul {
+            color: white;
+            font-size: 12px;
+            padding-left: 15px;
+        }
+
+        h1 {
+            display: inline-block;
+            margin-right: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>404 Error</h1>
+            <form action="{{ url_for('logout') }}" method="post">
+                <hr>
+                <p>Page not found</p>
+                <hr>
+                <button type="submit" class="btn">Go Home?</button>
+            </form>
+            <span>
+                By - <a href="https://github.com/programmermanan" target="_blank">Programmer Manan</a>
+                <br>
+                <a href="https://formsubmit.co/el/meriku" target="_blank">Contact Me</a>
+            </span>
+    </div>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+</body>
+
+</html>
