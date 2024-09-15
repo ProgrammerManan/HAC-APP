@@ -219,6 +219,26 @@ body{
 
     }
 
+        .truncate-class-name {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; /* Ensure the text truncates within the container */
+}
+@media (max-width: 385px) {
+    .truncate-class-name {
+        max-width: 180px; /* Adjust as needed for smaller screens */
+    }
+}
+
+        @media (max-width: 360px) {
+    .truncate-class-name {
+        max-width: 150px; /* Adjust as needed for smaller screens */
+    }
+}
+
+
 
     </style>
 </head>
@@ -239,23 +259,20 @@ body{
                 <hr>
 
         {% if data_classes %}
-            {% for class_info in data_classes %}
-            <div>
-                <!-- <p>
-                    {{ class_info.class_name }}
-                    <strong>{{ class_info.class_grade }}</strong>
-                </p> -->
-                <p>
-                    {{ class_info.class_name }}
-                    <strong class="class-grade">
-                        {{ class_info.class_grade }}
-                    </strong>
-                </p>
-<!--                <ul>-->
-<!--                    <br>{{ class_info.assignments | safe }}<br>-->
-<!--                </ul>-->
-            </div>
-            {% endfor %}
+           {% for class_info in data_classes %}
+<div>
+    <p>
+        <a href="{{ url_for('class_assignments', class_name=class_info.class_name) }}" class="truncate-class-name" style="color: inherit; text-decoration: none;">
+            {{ class_info.class_name }}
+        </a>
+
+        <strong class="class-grade">
+            {{ class_info.class_grade }}
+        </strong>
+    </p>
+</div>
+{% endfor %}
+
             <hr>
             <p class="weighted_gpa"> Weighted GPA<strong>{{ weighted_gpa }}</strong></p>
             <p class="weighted_gpa"> Max Weighted GPA<strong>{{ maxGPA }}</strong></p>
@@ -290,6 +307,11 @@ body{
                     element.style.backgroundColor = '#1fcc44';
                     // element.style.backgroundColor = '#FFDB58';
                 }
+
+                if (element.innerText === "") {
+                   element.innerText = "None"
+                   element.style.backgroundColor = '#A9A9A9'
+                }
             });
         });
     </script>
@@ -322,6 +344,19 @@ body{
         });
     </script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.querySelector('.btn');
+        var span = document.querySelector('#span');
+
+        if (btn && span) {
+            var btnWidth = btn.offsetWidth;
+            var spanWidth = span.offsetWidth;
+            var marginLeft = (btnWidth / 2) - (spanWidth / 2) + 'px';
+            span.style.marginLeft = marginLeft;
+        }
+    });
+</script>
 
 </body>
 </html>

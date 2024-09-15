@@ -16,20 +16,24 @@ def get(username, password):
         for class_info in data_classes.get('currentClasses', []):
             class_name = class_info.get('name', 'N/A')
             class_grade = class_info.get('grade', 'N/A')
-            
+
+
             assignments = class_info.get('assignments', [])
             assignments_info = []
 
             for assignment in assignments:
-                assignment_name = assignment.get('name', 'N/A')
-                assignment_score = assignment.get('score', 'N/A')
-                assignment_category = assignment.get('category', 'N/A')
+                if assignment.get('category') == "Assessment of Learning":
+                    assignment_name = assignment.get('name', 'N/A')
+                    assignment_score = assignment.get('score', 'N/A')
+                    assignment_category = assignment.get('category', 'N/A')
 
-                max_chars = 36  # You can adjust this value based on your preference
+                max_chars = 20  # You can adjust this value based on your preference
                 truncated_assignment_name = (
                 assignment_name[:max_chars] + '...' if len(assignment_name) > max_chars else assignment_name
                 )
-                
+
+                truncated_assignment_name = truncated_assignment_name.strip()
+
                 # Append assignment information to the list
                 assignments_info.append({
                 'name': truncated_assignment_name,
@@ -49,6 +53,12 @@ def get(username, password):
             class_name = class_name.replace(course_code, "")
             class_name = class_name.replace(course_number, "", 1)
             class_name = class_name.replace("-", "")
+
+            # max_chars = 20
+            # truncated_classname = (
+            #     class_name[:max_chars] + '...' if len(
+            #         class_name) > max_chars else class_name
+            # )
 
             classes_info.append({
                 "class_name": class_name,

@@ -1,81 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Add your head content here if needed -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments &#xb7; Programmer Manan</title>
+    <link rel="icon" type="image/x-icon" href="../static/Logo.png">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #262626;
-    background-color: #0B0C10;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
 
-}
-.wrapper{
-    width: 420px;
-    background-color: rgb(105, 105, 105);
-    background-color: #1F2833;
-    color: dodgerblue;
-    color: #66FcF1;
-    border-radius: 10px;
-    padding: 30px 40px;
-    border: 2px solid;
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #0B0C10;
+        }
 
-}
-.wrapper h1{
-    font-size: 36px;
-    text-align: center;
-}
-.wrapper p {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  width: 100%;
-  height: 50px;
-  background-color: #262626;
-  background-color: #1F2833;
-  margin: 30px 0;
-  font-size: 15px;
-}
+        .wrapper {
+            width: 90%;
+            max-width: 420px;
+            background-color: #1F2833;
+            color: #66FcF1;
+            border-radius: 10px;
+            padding: 30px 40px;
+            border: 2px solid;
+            margin: 10px;
+        }
 
-.wrapper p strong {
-    width: 70px;
-    height: 45px;
-    background-color: #66FcF1;
-    color: #1F2833;
-    border: none; /* Adjust the border size and color as needed */
-    outline: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 15px 17px 17px 17px;
-    text-align: right; /* Maintains right alignment */
-}
+        .wrapper h1 {
+            font-size: 36px;
+            text-align: center;
+        }
 
-        .wrapper .btn{
+        .wrapper h6 {
+            color: white;
+            text-align: center;
+        }
+
+        .wrapper p {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            height: 50px;
+            background-color: #1F2833;
+            margin: 30px 0;
+            font-size: 15px;
+        }
+
+        .wrapper p strong {
+            width: 70px;
+            height: 45px;
+            background-color: #66FcF1;
+            color: #1F2833;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 15px;
+            text-align: right;
+        }
+
+        .wrapper .btn {
             width: 100%;
             height: 45px;
             background-color: #66FcF1;
             color: #1F2833;
             border: none;
-            outline: none;
             border-radius: 45px;
-            /* box-shadow: 0 0 10px white; */
             cursor: pointer;
             font-size: 16px;
             font-weight: 600;
             margin-top: 20px;
+        }
+
+        .wrapper span {
+            text-align: center;
+            font-size: 12px;
+            color: white;
+            padding-top: 5px;
+        }
+
+        .wrapper a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .wrapper ul {
+            color: white;
+            font-size: 12px;
+            padding-left: 15px;
+        }
+
+        .refresh-btn {
+            text-decoration: none;
+            color: #66FcF1;
+            font-size: 50px;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+        .refresh-btn i {
+            color: black;
+            background-color: #66FcF1;
+            border-radius: 10px;
+        }
+
+        .refresh-btn i:hover {
+            background-color: #45A29E;
+        }
+
+        #loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1F2833;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+        }
+
+        #loading p {
+            font-size: 36px;
+            text-align: center;
+            color: #66FcF1;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        #loading p::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: #66FcF1;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            animation: slideLine 10s linear infinite;
+        }
+
+        @keyframes slideLine {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .refresh-btn {
+                font-size: 40px;
+            }
+            .wrapper h1 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .refresh-btn {
+                font-size: 36px;
+            }
+            .wrapper h1 {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 352px) {
+            .refresh-btn {
+                font-size: 32px;
+            }
+            .wrapper h1 {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .refresh-btn {
+                font-size: 30px;
+            }
+            .wrapper h1 {
+                font-size: 20px;
+            }
         }
 
         .wrapper span{
@@ -84,38 +205,90 @@ body{
             color: white;
             padding-top: 5px;
             justify-content: space-between;
-            padding-left: 40px;
 
         }
-
-        .wrapper a{
-            text-align: center;
-            color: white;
-            text-decoration: none;
-        }
-
-        .wrapper ul{
-            color: white;
-            font-size: 12px;
-            padding-left: 15px;
-        }
-
-
     </style>
 </head>
 <body>
     <div class="wrapper">
-        <h1>{{ class_name }} Assignments</h1>
-        <ul>
-            {% if assignments_info %}
-                {% for assignment in assignments_info %}
-                    <li>{{ assignment.name }} - {{ assignment.score }}</li>
-                {% endfor %}
-            {% else %}
-                <p>No assignments available for this class.</p>
+        <h6><a href="{{ url_for('beta_page') }}">BETA VERSION</a></h6>
+        <h1>
+            {{ class_name }}
+            <a href="/app" class="refresh-btn" title="Back to classes">
+                <i class='bx bx-arrow-back'></i>
+            </a>
+        </h1>
+        <hr>
+
+        {% for class_data in data_classes %}
+            {% if class_data.class_name == class_name %}
+                {% if class_data.assignments %}
+                    {% for assignment in class_data.assignments %}
+                        <div>
+                            <p>
+                                <a style="color: inherit; text-decoration: none;">{{ assignment.name }}</a>
+                                <strong class="class-grade">{{ assignment.score }}</strong>
+                            </p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No assignments available for this class.</p>
+                {% endif %}
             {% endif %}
-        </ul>
-        <a href="{{ url_for('app_page') }}">Back to Classes</a>
+        {% endfor %}
+
+        <div>
+            <form action="/app">
+                <hr>
+                <button type="submit" class="btn" id="btn">Back to classes</button>
+            </form>
+            <span id="span">
+                By - <a href="https://github.com/programmermanan" target="_blank">Programmer Manan</a> -
+                <a href="https://formsubmit.co/el/meriku" target="_blank">Contact Me</a>
+            </span>
+        </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var gradeElements = document.querySelectorAll('.class-grade');
+
+            gradeElements.forEach(function(element) {
+                var grade = parseInt(element.innerText);
+
+                if (Number(grade) < 70) {
+                    element.style.backgroundColor = '#FF0000';
+                } else if (Number(grade) < 80) {
+                    element.style.backgroundColor = '#FFDB58'; /* Mustard color */
+                } else if (Number(grade) < 90) {
+                    element.style.backgroundColor = '#1e90ff';
+                } else {
+                    element.style.backgroundColor = '#1fcc44';
+                }
+
+                if (element.innerText === "") {
+                   element.innerText = "None"
+                   element.style.backgroundColor = '#A9A9A9'
+                }
+            });
+        });
+    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.querySelector('.btn');
+        var span = document.querySelector('#span');
+
+        if (btn && span) {
+            var btnWidth = btn.offsetWidth;
+            var spanWidth = span.offsetWidth;
+            var marginLeft = (btnWidth / 2) - (spanWidth / 2) + 'px';
+            span.style.marginLeft = marginLeft;
+        }
+    });
+</script>
+
+
+
 </body>
 </html>

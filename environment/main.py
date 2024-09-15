@@ -145,6 +145,26 @@ def refresh_data():
     # Respond with new data (or a success message)
     return jsonify({'success': 'Data refreshed successfully'}), 200
 
+@app.route('/app/<class_name>', methods=['GET'])
+def class_assignments(class_name):
+    data_classes, weighted_gpa = session.get('result', ([], None))
+    unique_assignments = []
+
+    for class_data in data_classes:
+        if class_data['class_name'] == class_name:
+            seen_assignments = set()
+            for assignment in class_data['assignments']:
+                if assignment['name'] not in seen_assignments:
+                    unique_assignments.append(assignment)
+                    seen_assignments.add(assignment['name'])
+            break
+
+    return render_template('assignments.html', data_classes=[{'class_name': class_name,
+                                                              'assignments': unique_assignments,
+                                                              }], class_name=class_name)
+
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
