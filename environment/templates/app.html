@@ -265,9 +265,10 @@ body{
         <a href="{{ url_for('class_assignments', class_name=class_info.class_name) }}" class="truncate-class-name" style="color: inherit; text-decoration: none;">
             {{ class_info.class_name }}
         </a>
-
         <strong class="class-grade">
-            {{ class_info.class_grade }}
+            <a href="{{ url_for('class_assignments', class_name=class_info.class_name) }}" style="text-decoration: none; color: inherit; font: inherit; padding: 0px; margin: 0px;">
+                {{ class_info.class_grade }}
+            </a>
         </strong>
     </p>
 </div>

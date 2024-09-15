@@ -1,5 +1,4 @@
 import json
-import os
 
 from flask import Flask, abort, render_template, request, session, redirect, url_for, jsonify
 import requests
@@ -42,18 +41,11 @@ def calculate_weighted_gpa(class_names, class_grades):
                     total_weighted_grade += 5.0 - ((100 - grade) / 10)
                 max_weighted_grade += 5.0
 
-        try:
-            if session['hac_username'] == str(os.environ["ojas_ID"]):
-                classes_num = classes_num - 1
-                max_weighted_grade = max_weighted_grade - 6
-        except:
-            pass
-
         weighted_gpa = total_weighted_grade / classes_num
         max_weighted_gpa = max_weighted_grade / classes_num
 
-        weighted_gpa = round(weighted_gpa, 4)
-        max_weighted_gpa = round(max_weighted_gpa, 4)
+        weighted_gpa = f"{round(weighted_gpa, 4):.4f}"
+        max_weighted_gpa = f"{round(max_weighted_gpa, 4):.4f}"
     except Exception as e:
         print(f"An exception occurred: {e}")
         weighted_gpa = 0.000
