@@ -47,7 +47,7 @@ def get(username, password):
             course_number = course_info[1].split()[0].strip()
 
             if class_grade == "" or class_grade == " ":
-                class_grade = "0.00"
+                class_grade = "1010"
             # Append information to the list
 
             class_name = class_name.replace(course_code, "")
@@ -68,7 +68,7 @@ def get(username, password):
                 "assignments": assignments_info  # Exclude the first element (class name) when joining
             })
 
-        print(classes_info)
+        # print(classes_info)
         # Filter classes based on the condition that they have at least one assignment with:
         # category == "Assessment of learning" and score != ""
         filtered_classes_info = [

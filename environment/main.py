@@ -14,7 +14,7 @@ def calculate_weighted_gpa(class_names, class_grades):
         total_weighted_grade = 0
         max_weighted_grade = 0
         classes_num = len(class_names)
-        print(classes_num)
+        # print(classes_num)
 
         for i in range(classes_num):
             grade = float(class_grades[i])  # Convert grade to float
@@ -146,16 +146,17 @@ def class_assignments(class_name):
         if class_data['class_name'] == class_name:
             seen_assignments = set()
             for assignment in class_data['assignments']:
+                # Check for duplicate assignment names and add unique ones
                 if assignment['name'] not in seen_assignments:
                     unique_assignments.append(assignment)
                     seen_assignments.add(assignment['name'])
-            break
 
-    return render_template('assignments.html', data_classes=[{'class_name': class_name,
+            return render_template('assignments.html', data_classes=[{'class_name': class_name,
                                                               'assignments': unique_assignments,
-                                                              }], class_name=class_name)
-
-
+                                                              }], class_name=class_name,
+                                                                )
+    # If class_name not found, return a 404 error
+    abort(404)
 
 @app.errorhandler(404)
 def page_not_found(e):

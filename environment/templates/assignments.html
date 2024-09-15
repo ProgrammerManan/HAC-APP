@@ -232,7 +232,7 @@
                         </div>
                     {% endfor %}
                 {% else %}
-                    <p>No assignments are available for this class.</p>
+                    {{abort(404)}}
                 {% endif %}
             {% endif %}
         {% endfor %}
@@ -268,7 +268,7 @@
 
                 if (element.innerText === "") {
                    element.innerText = "None"
-                   element.style.backgroundColor = '#A9A9A9'
+                   element.style.backgroundColor = '#808080'
                 }
             });
         });
