@@ -20,6 +20,7 @@ def get(username, password):
 
             assignments = class_info.get('assignments', [])
             assignments_info = []
+            class_assignments_all_empty = True
 
             for assignment in assignments:
                 if assignment.get('category') == "Assessment of Learning":
@@ -41,12 +42,15 @@ def get(username, password):
                     'category': assignment_category
                     })
 
+                    if assignment_score not in ("", " "):
+                        assessment_assignments_all_empty = False
+
             # Extract course code and number
             course_info = class_name.split('-')
             course_code = course_info[0].strip()
             course_number = course_info[1].split()[0].strip()
 
-            if class_grade == "" or class_grade == " ":
+            if class_grade in ("", " ") or assessment_assignments_all_empty:
                 class_grade = "1010"
             # Append information to the list
 
