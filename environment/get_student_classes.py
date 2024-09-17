@@ -90,6 +90,8 @@ def get(username, password):
         )
 
         # Return the list containing information for all classes and the weighted GPA
+        if classes_info == []:
+            return "incorrect credentials"
         return classes_info, weighted_gpa
 
     except requests.exceptions.HTTPError as errh:

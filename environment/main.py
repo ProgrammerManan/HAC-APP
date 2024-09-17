@@ -1,9 +1,10 @@
 import json
 
-from flask import Flask, abort, render_template, request, session, redirect, url_for, jsonify
+from flask import Flask, abort, render_template, request, session, redirect, url_for, jsonify, flash
 import requests
 import get_student_info #Importing the student info file to get the info from the api
 import get_student_classes #Importing the student classes file to get the classes and grades from the api
+import re
 
 app = Flask(__name__, static_folder='static')
 app.secret_key = "your_secret_key"  # Change this to a secure secret key
@@ -81,8 +82,10 @@ def convert_to_integer(value):
     except (ValueError, TypeError):
         return 0  # Handle the case where conversion is not possible
 
+
 @app.route('/app', methods=['GET'])
 def app_page():
+    global name
     username = session.get('hac_username')
     password = session.get('hac_password')
 
@@ -91,22 +94,37 @@ def app_page():
 
     if "result" not in session or "data_info" not in session:
         result = get_student_classes.get(username, password)
+        if result == "incorrect credentials":
+            session.clear()
+            flash('Invalid credentials, please try again.', 'error')
+            return redirect(url_for('hac_login'))
+
+        # Assuming get_student_info returns a dictionary, no need for regex
+        student_info = get_student_info.get(username, password)
+
+        # Extracting the 'name' value and splitting it
+        full_name = student_info.get('name', '')
+        if full_name:
+            last_name, first_name = full_name.split(", ")
+            name = f"{first_name}'s"
+            session['student_name'] = name
+        else:
+            session["student_name"] = "Student's"
+
         data_info = get_student_info.get(username, password)
         session["result"] = result
         session["data_info"] = data_info
     else:
         result = session["result"]
         data_info = session["data_info"]
+        name = session["student_name"]
 
     data_classes, weighted_gpa = result
 
-
-    # for class_info in data_classes:
-    #     class_info['class_grade'] = convert_to_integer(class_info['class_grade'])
-
     return render_template('app.html', data_info=data_info,
                            data_classes=data_classes,
-                           weighted_gpa=weighted_gpa[0], maxGPA=weighted_gpa[1])
+                           weighted_gpa=weighted_gpa[0], maxGPA=weighted_gpa[1], student_name=name)
+
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
@@ -166,8 +184,8 @@ def page_not_found(e):
 def internal_error(e):
     return render_template('500.html'), 500
 
-# if __name__ == '__main__':
-#     app.run(debug=True, port=9999)
-
 if __name__ == '__main__':
-  app.run(debug=False, host='0.0.0.0')
+    app.run(debug=True, port=9999)
+
+# if __name__ == '__main__':
+#   app.run(debug=False, host='0.0.0.0')

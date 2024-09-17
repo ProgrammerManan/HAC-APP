@@ -37,7 +37,7 @@ body{
 
 }
 .wrapper h1{
-    font-size: 32px;
+    font-size: 30px;
     text-align: center;
 }
 .wrapper h6{
@@ -117,7 +117,7 @@ body{
 .refresh-btn {
     text-decoration: none;
     color: #66FcF1;
-    font-size: 50px;
+    font-size: 46px;
     vertical-align: middle;  /* Aligns the button to the middle of the H1 text */
     margin-left: 10px;
     /* Adds some spacing between the h1 text and the icon */
@@ -250,12 +250,13 @@ body{
     </div>
     <div class="wrapper">
         <h6><a href="{{ url_for('beta_page') }}">BETA VERSION</a></h6>
-        <h1 style="display: inline;">
-    Student Classes
+        <h1>
+            {{student_name}} Classes
+            <a href="#" class="refresh-btn" title="Refresh" id="refresh-btn">
+                <i class='bx bx-refresh' style=""></i>
+            </a>
         </h1>
-<a href="#" class="refresh-btn" title="Refresh" id="refresh-btn">
-    <i class='bx bx-refresh' style=""></i>
-</a>
+
                 <hr>
 
         {% if data_classes %}

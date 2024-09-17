@@ -19,4 +19,3 @@ def get(username, password):
         return jsonify({'error': f"Timeout Error: {errt}"})
     except requests.exceptions.RequestException as err:
         return jsonify({'error': f"An unexpected error occurred: {err}"})
-    
