@@ -61,6 +61,9 @@ def calculate_weighted_gpa(class_names, class_grades):
 #HAC Login page (for entering hac username and password)
 @app.route('/', methods=['GET','POST'])
 def hac_login():
+    if "hac_username" and "hac_password" in session:
+        return redirect(url_for('app_page'))
+
     if request.method == 'POST':
         # Get the username and password from the request form
         username = request.form['username']
@@ -184,8 +187,8 @@ def page_not_found(e):
 def internal_error(e):
     return render_template('500.html'), 500
 
-# if __name__ == '__main__':
-#     app.run(debug=True, port=9999)
-
 if __name__ == '__main__':
-  app.run(debug=False, host='0.0.0.0')
+    app.run(debug=True, port=9999)
+
+# if __name__ == '__main__':
+#   app.run(debug=False, host='0.0.0.0')

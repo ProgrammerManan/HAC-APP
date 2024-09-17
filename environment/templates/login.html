@@ -178,7 +178,8 @@
             </div>
             <div class="input-box">
                 <input type="password" placeholder="HAC Password" name="password" id="password" required/>
-                <i id="password-toggle" class='bx bxs-lock-alt'></i>
+                <i id="password-toggle"  class='bx bxs-lock-alt'></i>
+<!--                <i id="password-toggle" class='bx bx-hide' ></i>-->
             </div>
             
             <button type="submit" class="btn">Login</button>
@@ -205,9 +206,11 @@
         if (passwordInput.type === 'password') {
             passwordInput.type = 'text';
             icon.className = 'bx bxs-lock-open-alt';
+            // icon.className = 'bx bx-show';
         } else {
             passwordInput.type = 'password';
             icon.className = 'bx bxs-lock-alt';
+            // icon.className = 'bx bx-hide';
         }
     });
     </script>

@@ -207,6 +207,84 @@
             justify-content: space-between;
 
         }
+
+                    /* Modal Background */
+/* Modal Background */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #1F2833;
+    color: #66FcF1;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Close Button */
+.close-btn {
+    color: #66FcF1;
+    float: right;
+    font-size: 36px; /* Adjust the size here */
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 10px; /* Add padding to increase clickable area */
+    line-height: 1; /* Adjust line-height to align the text */
+    display: inline-block; /* Ensure it behaves as an inline-block element */
+}
+
+.close-btn:hover {
+    color: #45A29E;
+}
+
+
+.close-btn:hover {
+    color: #45A29E;
+}
+
+/* Modal Title */
+#assignment-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+/* Modal Details */
+#assignment-details {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.details p span{
+    font-size: 16px;
+}
+#assignment-details p {
+    margin: 10px 0; /* Space between lines */
+}
+
+/* Modal Title */
+#assignment-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    white-space: pre-wrap; /* Allow text to wrap to next line if necessary */
+    overflow-wrap: break-word; /* Break long words if necessary to fit in container */
+    word-break: break-word; /* Break long words to prevent overflow */
+}
     </style>
 </head>
 <body>
@@ -224,9 +302,9 @@
             {% if class_data.class_name == class_name %}
                 {% if class_data.assignments %}
                     {% for assignment in class_data.assignments %}
-                        <div>
+                        <div onclick="showAssignmentDetails('{{assignment.full_name}}', '{{ assignment.dateAssigned }}', '{{ assignment.dateDue }}', '{{ assignment.score }}')" style="cursor: pointer">
                             <p>
-                                <a style="color: inherit; text-decoration: none;">{{ assignment.name }}</a>
+                                <a style="color: inherit; text-decoration: none;">{{ assignment.name }} <br> <b style="font-size: 12px; color: white">{{ assignment.dateDue }}</b> </a>
                                 <strong class="class-grade">{{ assignment.score }}</strong>
                             </p>
                         </div>
@@ -236,6 +314,21 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
+
+        <!-- Modal Structure -->
+<!-- Modal Structure -->
+<div id="assignment-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" style="font-size: 35px">&times;</span>
+        <h2 id="assignment-title">Assignment Title</h2>
+        <hr>
+        <div id="assignment-details" class="details">
+            <u><p><b>Date Assigned:</b></u> <span id="date-assigned"></span></p>
+            <u><p><b>Date Due:</b></u> <span id="date-due"></span></p>
+            <u><p><b>Score:</b></u> <span id="assignment-score"></span></p>
+        </div>
+    </div>
+</div>
 
         <div>
             <form action="/app">
@@ -288,7 +381,37 @@
     });
 </script>
 
+<script>
+    function showAssignmentDetails(name, dateAssigned, dateDue, score) {
+    // Get modal elements
+    var modal = document.getElementById('assignment-modal');
+    var title = document.getElementById('assignment-title');
+    var dateAssignedElem = document.getElementById('date-assigned');
+    var dateDueElem = document.getElementById('date-due');
+    var scoreElem = document.getElementById('assignment-score');
 
+    // Set modal content
+    title.innerText = name;
+    dateAssignedElem.innerText = dateAssigned;
+    dateDueElem.innerText = dateDue;
+    scoreElem.innerText = score;
 
+    // Show modal
+    modal.style.display = 'flex';
+}
+
+// Close modal
+document.querySelector('.close-btn').addEventListener('click', function() {
+    document.getElementById('assignment-modal').style.display = 'none';
+});
+
+// Close modal when clicking outside the modal content
+window.addEventListener('click', function(event) {
+    if (event.target == document.getElementById('assignment-modal')) {
+        document.getElementById('assignment-modal').style.display = 'none';
+    }
+});
+
+</script>
 </body>
 </html>

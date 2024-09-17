@@ -26,7 +26,15 @@ def get(username, password):
                 if assignment.get('category') == "Assessment of Learning":
                     assignment_name = assignment.get('name', 'N/A')
                     assignment_score = assignment.get('score', 'N/A')
+                    if assignment_score == "":
+                        assignment_score = "None"
                     assignment_category = assignment.get('category', 'N/A')
+                    assignment_dateAssigned = assignment.get('dateAssigned', 'N/A')
+                    if assignment_dateAssigned == "":
+                        assignment_dateAssigned = "None"
+                    assignment_dateDue = assignment.get('dateDue', 'N/A')
+                    if assignment_dateDue == "":
+                        assignment_dateDue = "None"
                     max_chars = 20  # You can adjust this value based on your preference
                     truncated_assignment_name = (
                     assignment_name[:max_chars] + '...' if len(assignment_name) > max_chars else assignment_name
@@ -38,8 +46,11 @@ def get(username, password):
                     # Append assignment information to the list
                     assignments_info.append({
                     'name': truncated_assignment_name,
+                    'full_name': assignment_name,
                     'score': assignment_score,
-                    'category': assignment_category
+                    'category': assignment_category,
+                    'dateAssigned': assignment_dateAssigned,
+                    'dateDue': assignment_dateDue
                     })
 
                     if assignment_score not in ("", " "):
