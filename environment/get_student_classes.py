@@ -26,6 +26,7 @@ def get(username, password):
                 if assignment.get('category') == "Assessment of Learning":
                     assignment_name = assignment.get('name', 'N/A')
                     assignment_score = assignment.get('score', 'N/A')
+                    assignment_maximumScore = assignment.get('totalPoints', 'N/A')
                     assignment_category = assignment.get('category', 'N/A')
                     assignment_dateAssigned = assignment.get('dateAssigned', 'N/A')
                     if assignment_dateAssigned == "":
@@ -46,6 +47,7 @@ def get(username, password):
                     'name': truncated_assignment_name,
                     'full_name': assignment_name,
                     'score': assignment_score,
+                    'maximumScore': assignment_maximumScore,
                     'category': assignment_category,
                     'dateAssigned': assignment_dateAssigned,
                     'dateDue': assignment_dateDue

@@ -25,14 +25,14 @@
         }
 
         .wrapper {
-            width: 90%;
-            max-width: 420px;
+            /*width: 100%;*/
+            width: 420px;
             background-color: #1F2833;
             color: #66FcF1;
             border-radius: 10px;
             padding: 30px 40px;
             border: 2px solid;
-            margin: 10px;
+            /*margin: 10px;*/
         }
 
         .wrapper h1 {
@@ -231,7 +231,7 @@
     margin: 15% auto;
     padding: 20px;
     border-radius: 10px;
-    width: 80%;
+    width: 90%;
     max-width: 400px;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -302,7 +302,7 @@
             {% if class_data.class_name == class_name %}
                 {% if class_data.assignments %}
                     {% for assignment in class_data.assignments %}
-                        <div onclick="showAssignmentDetails('{{assignment.full_name}}', '{{ assignment.dateAssigned }}', '{{ assignment.dateDue }}', '{{ assignment.score }}')" style="cursor: pointer">
+                        <div onclick="showAssignmentDetails('{{assignment.full_name}}', '{{ assignment.dateAssigned }}', '{{ assignment.dateDue }}', '{{assignment.category}}', '{{ assignment.score }}', '{{assignment.maximumScore}}')" style="cursor: pointer">
                             <p>
                                 <a style="color: inherit; text-decoration: none;">{{ assignment.name }} <br> <b style="font-size: 12px; color: white">{{ assignment.dateDue }}</b> </a>
                                 <strong class="class-grade">{{ assignment.score }}</strong>
@@ -323,9 +323,11 @@
         <h2 id="assignment-title">Assignment Title</h2>
         <hr>
         <div id="assignment-details" class="details">
-            <u><p><b>Date Assigned:</b></u> <span id="date-assigned"></span></p>
-            <u><p><b>Date Due:</b></u> <span id="date-due"></span></p>
-            <u><p><b>Score:</b></u> <span id="assignment-score"></span></p>
+            <u><p style="background-color: #0B0C10; border-radius: 10px; padding: 10px;"><b>Date Assigned:</b></u> <span id="date-assigned"></span></p>
+            <u><p style="background-color: #0B0C10; border-radius: 10px; padding: 10px;"><b>Date Due:</b></u> <span id="date-due"></span></p>
+            <u><p style="background-color: #0B0C10; border-radius: 10px; padding: 10px;"><b>Category:</b></u> <span id="category"></span></p>
+            <u><p style="background-color: #0B0C10; border-radius: 10px; padding: 10px;"><b>Score:</b></u> <span id="assignment-score"></span></p>
+            <u><p style="background-color: #0B0C10; border-radius: 10px; padding: 10px;"><b>Maximum Points:</b></u> <span id="maximum-score"></span></p>
         </div>
     </div>
 </div>
@@ -382,19 +384,23 @@
 </script>
 
 <script>
-    function showAssignmentDetails(name, dateAssigned, dateDue, score) {
+    function showAssignmentDetails(name, dateAssigned, dateDue, category, score, maximumScore) {
     // Get modal elements
     var modal = document.getElementById('assignment-modal');
     var title = document.getElementById('assignment-title');
     var dateAssignedElem = document.getElementById('date-assigned');
     var dateDueElem = document.getElementById('date-due');
+    var categoryElem = document.getElementById('category');
     var scoreElem = document.getElementById('assignment-score');
+    var maximumScoreElem = document.getElementById('maximum-score');
 
     // Set modal content
     title.innerText = name;
     dateAssignedElem.innerText = dateAssigned;
     dateDueElem.innerText = dateDue;
+    categoryElem.innerText = category;
     scoreElem.innerText = score;
+    maximumScoreElem.innerText = maximumScore;
 
     if (scoreElem.innerText === ""){
         scoreElem.innerText = "None"
