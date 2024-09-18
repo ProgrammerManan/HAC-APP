@@ -162,6 +162,7 @@ def refresh_data():
 def class_assignments(class_name):
     data_classes, weighted_gpa = session.get('result', ([], None))
     unique_assignments = []
+    unique_assignments_progressCheck = []
 
     for class_data in data_classes:
         if class_data['class_name'] == class_name:
@@ -169,11 +170,16 @@ def class_assignments(class_name):
             for assignment in class_data['assignments']:
                 # Check for duplicate assignment names and add unique ones
                 if assignment['name'] not in seen_assignments:
-                    unique_assignments.append(assignment)
-                    seen_assignments.add(assignment['name'])
-
+                    if assignment.get('category') == "Assessment of Learning":
+                        unique_assignments.append(assignment)
+                        seen_assignments.add(assignment['name'])
+                    else:
+                        unique_assignments_progressCheck.append(assignment)
+                        seen_assignments.add(assignment['name'])
             return render_template('assignments.html', data_classes=[{'class_name': class_name,
                                                               'assignments': unique_assignments,
+                                                                      'assignmentsProgressChecks'
+                                                                      : unique_assignments_progressCheck
                                                               }], class_name=class_name,
                                                                 )
     # If class_name not found, return a 404 error

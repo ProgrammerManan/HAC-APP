@@ -23,7 +23,7 @@ def get(username, password):
             class_assignments_all_empty = True
 
             for assignment in assignments:
-                if assignment.get('category') == "Assessment of Learning":
+                # if assignment.get('category') == "Assessment of Learning":
                     assignment_name = assignment.get('name', 'N/A')
                     assignment_score = assignment.get('score', 'N/A')
                     assignment_maximumScore = assignment.get('totalPoints', 'N/A')

@@ -241,21 +241,22 @@
 .close-btn {
     color: #66FcF1;
     float: right;
-    font-size: 36px; /* Adjust the size here */
+    font-size: 20px; /* Adjust the size here */
     font-weight: bold;
     cursor: pointer;
     padding: 0 10px; /* Add padding to increase clickable area */
-    line-height: 1; /* Adjust line-height to align the text */
+    line-height: 0; /* Adjust line-height to align the text */
     display: inline-block; /* Ensure it behaves as an inline-block element */
+    margin-top: 15px;
 }
 
 .close-btn:hover {
-    color: #45A29E;
+    color: #66FcF1;
 }
 
 
 .close-btn:hover {
-    color: #45A29E;
+    color: #66FcF1;
 }
 
 /* Modal Title */
@@ -285,6 +286,67 @@
     overflow-wrap: break-word; /* Break long words if necessary to fit in container */
     word-break: break-word; /* Break long words to prevent overflow */
 }
+
+/*Progress Checks */
+           .switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #303B4A;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #0B0C10;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider{
+  background-color: white;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px white;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
     </style>
 </head>
 <body>
@@ -297,7 +359,14 @@
             </a>
         </h1>
         <hr>
-
+        <h3 style="margin-top: 15px">
+            Progress Checks
+            <label class="switch">
+                <input type="checkbox" id="progress-check-toggle">
+                <span class="slider round"></span>
+            </label>
+        </h3>
+        <hr style="margin-top: 15px">
         {% for class_data in data_classes %}
             {% if class_data.class_name == class_name %}
                 {% if class_data.assignments %}
@@ -309,6 +378,16 @@
                             </p>
                         </div>
                     {% endfor %}
+                <div id="assignments-container" style="display: none;">
+                    {% for assignment in class_data.assignmentsProgressChecks %}
+                        <div onclick="showAssignmentDetails('{{assignment.full_name}}', '{{ assignment.dateAssigned }}', '{{ assignment.dateDue }}', '{{assignment.category}}', '{{ assignment.score }}', '{{assignment.maximumScore}}')" style="cursor: pointer">
+                            <p>
+                                <a style="color: inherit; text-decoration: none;">{{ assignment.name }} <br> <b style="font-size: 12px; color: white">{{ assignment.dateDue }}</b> </a>
+                                <strong class="class-grade" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{ assignment.score }}</strong>
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>
                 {% else %}
                     {{abort(404)}}
                 {% endif %}
@@ -319,15 +398,15 @@
 <!-- Modal Structure -->
 <div id="assignment-modal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" style="font-size: 35px">&times;</span>
+        <span class="close-btn" style="font-size: 45px">&times;</span>
         <h2 id="assignment-title">Assignment Title</h2>
         <hr>
         <div id="assignment-details" class="details">
-            <u><p style="background-color: #0B0C10; border-radius: 10px; padding: 10px;"><b>Date Assigned:</b></u> <span id="date-assigned"></span></p>
-            <u><p style="background-color: #0B0C10; border-radius: 10px; padding: 10px;"><b>Date Due:</b></u> <span id="date-due"></span></p>
-            <u><p style="background-color: #0B0C10; border-radius: 10px; padding: 10px;"><b>Category:</b></u> <span id="category"></span></p>
-            <u><p style="background-color: #0B0C10; border-radius: 10px; padding: 10px;"><b>Score:</b></u> <span id="assignment-score"></span></p>
-            <u><p style="background-color: #0B0C10; border-radius: 10px; padding: 10px;"><b>Maximum Points:</b></u> <span id="maximum-score"></span></p>
+            <u><p style="background-color: #303B4A; border-radius: 10px; padding: 10px;"><b>Date Assigned:</b></u> <span id="date-assigned"></span></p>
+            <u><p style="background-color: #303B4A; border-radius: 10px; padding: 10px;"><b>Date Due:</b></u> <span id="date-due"></span></p>
+            <u><p style="background-color: #303B4A; border-radius: 10px; padding: 10px;"><b>Category:</b></u> <span id="category"></span></p>
+            <u><p style="background-color: #303B4A; border-radius: 10px; padding: 10px;"><b>Score:</b></u> <span id="assignment-score"></span></p>
+            <u><p style="background-color: #303B4A; border-radius: 10px; padding: 10px;"><b>Maximum Points:</b></u> <span id="maximum-score"></span></p>
         </div>
     </div>
 </div>
@@ -422,6 +501,17 @@ window.addEventListener('click', function(event) {
     }
 });
 
+</script>
+
+<script>
+    document.getElementById('progress-check-toggle').addEventListener('change', function() {
+        var assignmentsContainer = document.getElementById('assignments-container');
+        if (this.checked) {
+            assignmentsContainer.style.display = 'block';
+        } else {
+            assignmentsContainer.style.display = 'none';
+        }
+    });
 </script>
 </body>
 </html>
