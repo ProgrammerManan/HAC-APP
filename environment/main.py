@@ -194,8 +194,8 @@ def internal_error(e):
     session.clear()
     return render_template('500.html'), 500
 
-# if __name__ == '__main__':
-#     app.run(debug=True, port=9999)
-
 if __name__ == '__main__':
-  app.run(debug=False, host='0.0.0.0')
+    app.run(debug=True, port=9999)
+
+# if __name__ == '__main__':
+#   app.run(debug=False, host='0.0.0.0')
