@@ -26,8 +26,6 @@ def get(username, password):
                 if assignment.get('category') == "Assessment of Learning":
                     assignment_name = assignment.get('name', 'N/A')
                     assignment_score = assignment.get('score', 'N/A')
-                    if assignment_score == "":
-                        assignment_score = "None"
                     assignment_category = assignment.get('category', 'N/A')
                     assignment_dateAssigned = assignment.get('dateAssigned', 'N/A')
                     if assignment_dateAssigned == "":

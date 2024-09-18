@@ -396,6 +396,10 @@
     dateDueElem.innerText = dateDue;
     scoreElem.innerText = score;
 
+    if (scoreElem.innerText === ""){
+        scoreElem.innerText = "None"
+    }
+
     // Show modal
     modal.style.display = 'flex';
 }
